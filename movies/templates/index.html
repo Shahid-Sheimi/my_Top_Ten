@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>signup</h3>
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="fname" placeholder="First Name">
+        <input type="text" name="lname" placeholder="Last Name">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Sign Up">
+    </form>
+
+    <br><br>
+    <h2>signin</h2>
+    <form method="post" action="{% url 'signin' %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Sign In">
+    </form>
+
+    <!-- reorder_top_ten.html -->
+
+<form method="post">
+    {% csrf_token %}
+    <ul id="sortable">
+      {% for movie in user.profile.top_ten_movies.all %}
+        <li class="ui-state-default">{{ movie.title }}</li>
+        <input type="hidden" name="movie_id[]" value="{{ movie.id }}">
+      {% endfor %}
+    </ul>
+    <input type="submit" value="Save Order">
+  </form>
+  
+  <!-- Add jQuery UI library for sortable functionality -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  
+  <!-- JavaScript to enable sorting of the movies -->
+  <script>
+    $(document).ready(function() {
+      $('#sortable').sortable();
+      $('#sortable').disableSelection();
+    });
+  </script>
+
+  <!-- edit_top_ten.html -->
+
+<form method="post">
+    {% csrf_token %}
+    <label for="title">Title:</label>
+    <input type="text" name="title" value="{{ movie.title }}"><br>
+    <label for="release_date">Release Date:</label>
+    <input type="date" name="release_date" value="{{ movie.release_date }}"><br>
+    <input type="submit" value="Save">
+  </form>
+  
+   <!-- Loop through the user's top ten movies and display each movie -->
+   {% for movie in top_ten_movies %}
+   <h2>{{ movie.title }}</h2>
+   <p>Release Date: {{ movie.release_date }}</p>
+   <!-- Add more movie details or customize the display as needed -->
+   <a href="{% url 'movie_detail' movie.id %}">View Details</a>  <!-- Link to movie details page -->
+{% endfor %}
+</body>
+</html>
