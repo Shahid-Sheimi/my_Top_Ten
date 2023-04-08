@@ -55,7 +55,13 @@ bash
 
 Copy code
 
-python manage.py runserver
+python manage.py runserver 
+
+python manage.py makemigrations 
+
+python manage.py migrate 
+
+
 
 The application will prompt you to enter a movie title. It will then fetch information about the movie from the TMDb API and display it in the console.
 
