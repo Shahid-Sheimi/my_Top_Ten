@@ -16,6 +16,7 @@ An API key from TMDb. You can obtain one by registering for a free account on th
 Installation
 
 Clone the project repository to your local machine:
+
 ``` python
 
 git clone https://github.com/Shahid-Sheimi/my_top_ten.git
@@ -36,13 +37,11 @@ Install the project dependencies:
 
 pip install -r requirements.txt
 
+
 ```
 
 Create a .env file in the project directory and add your TMDb API key to it:
 
-bash
-
-Copy code
 
 TMDB_API_KEY=YOUR_API_KEY
 
